@@ -44,14 +44,16 @@ export default function WhyJarosun() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {features.map((f, i) => (
               <Reveal key={i} delay={0.2 + (i * 0.1)}>
-                <div className="flex items-start gap-4">
-                  <f.icon className="w-5 h-5 text-brand-red mt-1 shrink-0 opacity-50" />
+                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl hover:bg-white/[0.04] hover:border-white/10 hover:-translate-y-1 transition-all duration-300 group flex items-start gap-4">
+                  <div className="p-2.5 rounded-xl bg-brand-red/10 group-hover:bg-brand-red/20 transition-all duration-300">
+                    <f.icon className="w-5 h-5 text-brand-red shrink-0" />
+                  </div>
                   <div>
                     <h4 className="text-white font-bold text-sm mb-1">{f.title}</h4>
-                    <p className="text-xs text-white/30 leading-relaxed">High-standards delivery.</p>
+                    <p className="text-xs text-white/40 leading-relaxed">High-standards delivery.</p>
                   </div>
                 </div>
               </Reveal>

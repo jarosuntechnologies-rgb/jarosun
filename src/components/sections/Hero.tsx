@@ -59,10 +59,13 @@ export default function Hero() {
             </div>
 
             <Reveal delay={0.3}>
-              <p className="text-base md:text-lg text-white/50 mb-12 max-w-lg leading-relaxed">
-                Jarosun is a minimalist digital studio focused on speed, security, 
-                and precision. We help startups scale with clean, high-efficiency 
-                web experiences.
+              <p className="text-base md:text-lg text-white/50 mb-12 max-w-2xl leading-relaxed">
+                At Jarosun Technologies, we don't just build technology—we engineer possibilities. 
+                Driven by innovation and powered by expertise, we create intelligent digital solutions 
+                that help businesses adapt, grow, and lead in a rapidly evolving world. From next-generation 
+                software and cloud solutions to transformative digital experiences, our mission is to turn 
+                ambitious ideas into impactful realities. We are committed to delivering excellence, 
+                fostering innovation, and shaping a smarter, technology-enabled future.
               </p>
             </Reveal>
 

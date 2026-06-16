@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Send, Bot } from "lucide-react";
+import Reveal from "@/components/ui/Reveal";
 
 const TypingIndicator = () => (
   <div className="flex items-center gap-1 bg-white/[0.05] px-4 py-3 rounded-2xl w-fit">
@@ -19,11 +20,13 @@ export default function ChatbotWidget() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom of conversation
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
@@ -74,11 +77,17 @@ export default function ChatbotWidget() {
     <section className="py-32 px-6 bg-[#080808]">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-24">
         <div className="flex-1 space-y-8 text-center lg:text-left">
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">Automation.</h2>
-          <p className="text-white/40 text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
-            Intelligent support solutions and lead capture bots integrated 
-            seamlessly into your workflow.
-          </p>
+          <Reveal>
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+              Intelligent <span className="text-brand-red">Automation.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.3}>
+            <p className="text-white/40 text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
+              Intelligent support solutions and lead capture bots integrated 
+              seamlessly into your workflow.
+            </p>
+          </Reveal>
         </div>
 
         <div className="flex-1 w-full max-w-sm">
@@ -93,7 +102,7 @@ export default function ChatbotWidget() {
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto space-y-4 mb-6 scrollbar-hide pr-1">
+            <div ref={chatContainerRef} className="flex-1 overflow-y-auto space-y-4 mb-6 scrollbar-hide pr-1">
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div className={`text-xs px-4 py-3 rounded-2xl max-w-[80%] ${
@@ -109,8 +118,6 @@ export default function ChatbotWidget() {
                   <TypingIndicator />
                 </div>
               )}
-
-              <div ref={messagesEndRef} />
             </div>
 
             <div className="relative">
