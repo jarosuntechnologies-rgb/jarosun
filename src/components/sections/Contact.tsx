@@ -51,7 +51,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
           <div className="space-y-8 flex flex-col justify-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
+              <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight">
                 Let's build <br />
                 <span className="text-brand-red">together.</span>
               </h2>
