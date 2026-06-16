@@ -79,47 +79,49 @@ export default function ChatbotWidget() {
     <>
       {/* Floating Action Container */}
       <div className="fixed bottom-8 right-8 z-50 flex items-center">
-        {/* Greeting Speech Bubble / Tooltip */}
-        <AnimatePresence>
-          {!isOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: 20, scale: 0.95 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: 20, scale: 0.95 }}
-              transition={{ delay: 1, duration: 0.3 }}
-              className="mr-4 glass border-brand-red/30 px-4 py-2.5 rounded-2xl shadow-[0_4px_25px_rgba(192,0,0,0.2)] text-white pointer-events-none select-none hidden md:block"
-            >
-              <div className="text-[10px] font-bold uppercase tracking-wider text-brand-red mb-0.5">Jarobot Online</div>
-              <div className="text-[11px] text-white/80 font-medium">Need help? Ask me anything! 👋</div>
-              
-              {/* Speech bubble pointer arrow */}
-              <div className="absolute right-[-5px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rotate-45 bg-[#0a0a0a] border-r border-t border-white/[0.05]" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Floating Action Button (FAB) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative w-14 h-14 sm:w-16 h-16 rounded-full overflow-hidden border border-brand-red/40 bg-black shadow-[0_0_25px_rgba(192,0,0,0.4)] hover:shadow-[0_0_35px_rgba(192,0,0,0.7)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center group"
+          className="flex items-center cursor-pointer group focus:outline-none"
           aria-label="Toggle Chatbot"
         >
-          {/* Pulsing ring for visibility */}
-          <div className="absolute -inset-1.5 rounded-full border border-brand-red/30 animate-pulse pointer-events-none" />
-          <div className="absolute -inset-3 rounded-full border border-brand-red/10 animate-ping [animation-duration:3s] pointer-events-none" />
-          
-          <img 
-            src="/chatbot-icon.jpg" 
-            alt="Jarobot Icon" 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-          />
-          
-          {/* Toggle icon overlay when open */}
-          {isOpen && (
-            <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px]">
-              <X className="w-6 h-6 text-white" />
-            </div>
-          )}
+          {/* Greeting Speech Bubble / Tooltip */}
+          <AnimatePresence>
+            {!isOpen && (
+              <motion.div
+                initial={{ opacity: 0, x: 20, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 20, scale: 0.95 }}
+                transition={{ delay: 1, duration: 0.3 }}
+                className="mr-4 glass border-brand-red/30 px-4 py-2.5 rounded-2xl shadow-[0_4px_25px_rgba(192,0,0,0.2)] text-white select-none hidden md:block hover:bg-white/[0.04] transition-colors"
+              >
+                <div className="text-[10px] font-bold uppercase tracking-wider text-brand-red mb-0.5 text-left">Jarobot Online</div>
+                <div className="text-[11px] text-white/80 font-medium text-left">Need help? Ask me anything! 👋</div>
+                
+                {/* Speech bubble pointer arrow */}
+                <div className="absolute right-[-5px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rotate-45 bg-[#0a0a0a] border-r border-t border-white/[0.05]" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Floating Action Button (FAB) - Styled as part of the group */}
+          <div className="relative w-14 h-14 sm:w-16 h-16 rounded-full overflow-hidden border border-brand-red/40 bg-black shadow-[0_0_25px_rgba(192,0,0,0.4)] group-hover:shadow-[0_0_35px_rgba(192,0,0,0.7)] group-hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center">
+            {/* Pulsing ring for visibility */}
+            <div className="absolute -inset-1.5 rounded-full border border-brand-red/30 animate-pulse pointer-events-none" />
+            <div className="absolute -inset-3 rounded-full border border-brand-red/10 animate-ping [animation-duration:3s] pointer-events-none" />
+            
+            <img 
+              src="/chatbot-icon.jpg" 
+              alt="Jarobot Icon" 
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+            />
+            
+            {/* Toggle icon overlay when open */}
+            {isOpen && (
+              <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px]">
+                <X className="w-6 h-6 text-white" />
+              </div>
+            )}
+          </div>
         </button>
       </div>
 
