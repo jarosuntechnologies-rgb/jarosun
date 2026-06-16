@@ -37,13 +37,82 @@ export default function StartProject() {
   const [timeline, setTimeline] = useState("");
   const [description, setDescription] = useState("");
 
+  const [errors, setErrors] = useState({
+    name: false,
+    email: false,
+    projectType: false,
+    budget: false,
+    timeline: false,
+    description: false,
+  });
+
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleNameChange = (val: string) => {
+    setName(val);
+    if (errors.name) {
+      setErrors((prev) => ({ ...prev, name: false }));
+    }
+    if (status === "error") setStatus("idle");
+  };
+
+  const handleEmailChange = (val: string) => {
+    setEmail(val);
+    if (errors.email) {
+      setErrors((prev) => ({ ...prev, email: false }));
+    }
+    if (status === "error") setStatus("idle");
+  };
+
+  const handleProjectTypeSelect = (val: string) => {
+    setProjectType(val);
+    if (errors.projectType) {
+      setErrors((prev) => ({ ...prev, projectType: false }));
+    }
+    if (status === "error") setStatus("idle");
+  };
+
+  const handleBudgetSelect = (val: string) => {
+    setBudget(val);
+    if (errors.budget) {
+      setErrors((prev) => ({ ...prev, budget: false }));
+    }
+    if (status === "error") setStatus("idle");
+  };
+
+  const handleTimelineSelect = (val: string) => {
+    setTimeline(val);
+    if (errors.timeline) {
+      setErrors((prev) => ({ ...prev, timeline: false }));
+    }
+    if (status === "error") setStatus("idle");
+  };
+
+  const handleDescriptionChange = (val: string) => {
+    setDescription(val);
+    if (errors.description) {
+      setErrors((prev) => ({ ...prev, description: false }));
+    }
+    if (status === "error") setStatus("idle");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !projectType || !budget || !timeline || !description.trim()) {
-      setErrorMessage("Please fill out all required fields.");
+    
+    const newErrors = {
+      name: !name.trim(),
+      email: !email.trim(),
+      projectType: !projectType,
+      budget: !budget,
+      timeline: !timeline,
+      description: !description.trim(),
+    };
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrorMessage("Please fill out all required fields highlighted below.");
       setStatus("error");
       return;
     }
@@ -138,6 +207,14 @@ export default function StartProject() {
                     setBudget("");
                     setTimeline("");
                     setDescription("");
+                    setErrors({
+                      name: false,
+                      email: false,
+                      projectType: false,
+                      budget: false,
+                      timeline: false,
+                      description: false,
+                    });
                     setStatus("idle");
                   }}
                   className="border border-white/10 text-white/60 py-4 px-8 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-white/5 hover:text-white transition-all"
@@ -183,27 +260,35 @@ export default function StartProject() {
                   <h3 className="text-xs uppercase tracking-[0.2em] text-white/30 font-bold border-b border-white/5 pb-2">1. Your Details</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">Name *</label>
+                      <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">
+                        Name *
+                      </label>
                       <input 
                         required
                         type="text"
                         placeholder="John Doe"
                         value={name}
                         disabled={status === "submitting"}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full bg-white/[0.02] border border-white/[0.05] rounded-xl py-4 px-6 text-white text-sm focus:outline-none focus:border-brand-red/30 transition-colors disabled:opacity-50 placeholder:text-white/10" 
+                        onChange={(e) => handleNameChange(e.target.value)}
+                        className={`w-full bg-white/[0.02] border rounded-xl py-4 px-6 text-white text-sm focus:outline-none focus:border-brand-red/30 transition-colors disabled:opacity-50 placeholder:text-white/10 ${
+                          errors.name ? "border-red-500/50 focus:border-red-500" : "border-white/[0.05]"
+                        }`} 
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">Email *</label>
+                      <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">
+                        Email *
+                      </label>
                       <input 
                         required
                         type="email"
                         placeholder="john@example.com"
                         value={email}
                         disabled={status === "submitting"}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-white/[0.02] border border-white/[0.05] rounded-xl py-4 px-6 text-white text-sm focus:outline-none focus:border-brand-red/30 transition-colors disabled:opacity-50 placeholder:text-white/10" 
+                        onChange={(e) => handleEmailChange(e.target.value)}
+                        className={`w-full bg-white/[0.02] border rounded-xl py-4 px-6 text-white text-sm focus:outline-none focus:border-brand-red/30 transition-colors disabled:opacity-50 placeholder:text-white/10 ${
+                          errors.email ? "border-red-500/50 focus:border-red-500" : "border-white/[0.05]"
+                        }`} 
                       />
                     </div>
                   </div>
@@ -226,18 +311,22 @@ export default function StartProject() {
                   
                   {/* Project Type Selection */}
                   <div className="space-y-3">
-                    <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">What are we building? *</label>
-                    <div className="flex flex-wrap gap-3">
+                    <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">
+                      What are we building? * {errors.projectType && <span className="text-red-500 lowercase font-normal italic font-sans ml-2">(Selection required)</span>}
+                    </label>
+                    <div className={`flex flex-wrap gap-3 p-1 rounded-2xl transition-colors ${errors.projectType ? "border border-red-500/30 bg-red-500/[0.01]" : ""}`}>
                       {projectTypes.map((type) => (
                         <button
                           key={type}
                           type="button"
                           disabled={status === "submitting"}
-                          onClick={() => setProjectType(type)}
+                          onClick={() => handleProjectTypeSelect(type)}
                           className={`py-3 px-5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                             projectType === type 
                               ? "bg-brand-red text-white border border-brand-red" 
-                              : "bg-white/[0.02] border border-white/[0.05] text-white/60 hover:text-white hover:border-white/10"
+                              : `bg-white/[0.02] border text-white/60 hover:text-white hover:border-white/10 ${
+                                  errors.projectType ? "border-red-500/20" : "border-white/[0.05]"
+                                }`
                           }`}
                         >
                           {type}
@@ -249,18 +338,22 @@ export default function StartProject() {
                   {/* Budget & Timeline selection side-by-side */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
                     <div className="space-y-3">
-                      <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">Estimated Budget *</label>
-                      <div className="grid grid-cols-2 gap-3">
+                      <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">
+                        Estimated Budget * {errors.budget && <span className="text-red-500 lowercase font-normal italic font-sans ml-2">(Selection required)</span>}
+                      </label>
+                      <div className={`grid grid-cols-2 gap-3 p-1 rounded-2xl transition-colors ${errors.budget ? "border border-red-500/30 bg-red-500/[0.01]" : ""}`}>
                         {budgetRanges.map((range) => (
                           <button
                             key={range}
                             type="button"
                             disabled={status === "submitting"}
-                            onClick={() => setBudget(range)}
+                            onClick={() => handleBudgetSelect(range)}
                             className={`py-3 px-4 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all cursor-pointer text-center ${
                               budget === range 
                                 ? "bg-brand-red text-white border border-brand-red" 
-                                : "bg-white/[0.02] border border-white/[0.05] text-white/60 hover:text-white hover:border-white/10"
+                                : `bg-white/[0.02] border text-white/60 hover:text-white hover:border-white/10 ${
+                                    errors.budget ? "border-red-500/20" : "border-white/[0.05]"
+                                  }`
                             }`}
                           >
                             {range}
@@ -270,18 +363,22 @@ export default function StartProject() {
                     </div>
 
                     <div className="space-y-3">
-                      <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">Desired Timeline *</label>
-                      <div className="grid grid-cols-2 gap-3">
+                      <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">
+                        Desired Timeline * {errors.timeline && <span className="text-red-500 lowercase font-normal italic font-sans ml-2">(Selection required)</span>}
+                      </label>
+                      <div className={`grid grid-cols-2 gap-3 p-1 rounded-2xl transition-colors ${errors.timeline ? "border border-red-500/30 bg-red-500/[0.01]" : ""}`}>
                         {timelines.map((time) => (
                           <button
                             key={time}
                             type="button"
                             disabled={status === "submitting"}
-                            onClick={() => setTimeline(time)}
+                            onClick={() => handleTimelineSelect(time)}
                             className={`py-3 px-4 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all cursor-pointer text-center ${
                               timeline === time 
                                 ? "bg-brand-red text-white border border-brand-red" 
-                                : "bg-white/[0.02] border border-white/[0.05] text-white/60 hover:text-white hover:border-white/10"
+                                : `bg-white/[0.02] border text-white/60 hover:text-white hover:border-white/10 ${
+                                    errors.timeline ? "border-red-500/20" : "border-white/[0.05]"
+                                  }`
                             }`}
                           >
                             {time}
@@ -296,15 +393,19 @@ export default function StartProject() {
                 <div className="space-y-6">
                   <h3 className="text-xs uppercase tracking-[0.2em] text-white/30 font-bold border-b border-white/5 pb-2">3. Requirements</h3>
                   <div className="space-y-2">
-                    <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">Detailed Requirements *</label>
+                    <label className="text-[10px] text-white/40 font-bold uppercase tracking-widest block">
+                      Detailed Requirements *
+                    </label>
                     <textarea 
                       required
                       rows={6}
                       placeholder="Please detail your feature requirements, design preferences, required integrations, and any other relevant goals..."
                       value={description}
                       disabled={status === "submitting"}
-                      onChange={(e) => setDescription(e.target.value)}
-                      className="w-full bg-white/[0.02] border border-white/[0.05] rounded-xl py-4 px-6 text-white text-sm focus:outline-none focus:border-brand-red/30 transition-colors disabled:opacity-50 placeholder:text-white/10 resize-none leading-relaxed" 
+                      onChange={(e) => handleDescriptionChange(e.target.value)}
+                      className={`w-full bg-white/[0.02] border rounded-xl py-4 px-6 text-white text-sm focus:outline-none focus:border-brand-red/30 transition-colors disabled:opacity-50 placeholder:text-white/10 resize-none leading-relaxed ${
+                        errors.description ? "border-red-500/50 focus:border-red-500" : "border-white/[0.05]"
+                      }`} 
                     />
                   </div>
                 </div>

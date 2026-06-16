@@ -5,7 +5,6 @@ import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
 import WhyJarosun from "@/components/sections/WhyJarosun";
 import TechStack from "@/components/sections/TechStack";
-import ChatbotWidget from "@/components/sections/ChatbotWidget";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
@@ -16,7 +15,6 @@ export default function Home() {
       <Services />
       <WhyJarosun />
       <TechStack />
-      <ChatbotWidget />
       <Contact />
       <Footer />
     </main>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Geist_Mono } from "next/font/google";
+import ChatbotWidget from "@/components/sections/ChatbotWidget";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth">
       <body className={`${outfit.variable} ${geistMono.variable} font-sans bg-black text-white antialiased`}>
         {children}
+        <ChatbotWidget />
       </body>
     </html>
   );
