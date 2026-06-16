@@ -29,7 +29,7 @@ export default function Navbar() {
       items={menuItems}
       socialItems={socialItems}
       displaySocials={true}
-      displayItemNumbering={true}
+      displayItemNumbering={false}
       closeOnClickAway={true}
     />
   );
