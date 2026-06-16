@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       } else if (lastUserMessage.includes("price") || lastUserMessage.includes("cost") || lastUserMessage.includes("how much")) {
         simulatedReply = "Our pricing is tailored to the project size and complexity. Reach out via our contact section below with your requirements, and we'll provide a custom quote!";
       } else if (lastUserMessage.includes("portfolio") || lastUserMessage.includes("work") || lastUserMessage.includes("projects")) {
-        simulatedReply = "We design high-performance sites and products with smooth animations, using modern frameworks. Check out our Work section above or email us to view our full portfolio!";
+        simulatedReply = "We design high-performance sites and products with smooth animations, using modern frameworks. Check out our Projects section above or email us to view our full portfolio!";
       }
 
       // Add a slight delay to simulate a real network request

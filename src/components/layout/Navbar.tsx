@@ -5,7 +5,7 @@ import StaggeredMenu from "@/components/ui/StaggeredMenu";
 
 const menuItems = [
   { label: "Services", ariaLabel: "View our services", link: "/#services" },
-  { label: "Work", ariaLabel: "View our portfolio", link: "/#portfolio" },
+  { label: "Projects", ariaLabel: "View our projects", link: "/#projects" },
   { label: "Tech", ariaLabel: "View our tech stack", link: "/#tech" },
   { label: "Contact", ariaLabel: "Get in touch", link: "/#contact" },
 ];

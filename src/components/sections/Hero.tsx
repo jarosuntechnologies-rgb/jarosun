@@ -77,9 +77,12 @@ export default function Hero() {
                 >
                   Start Project
                 </Link>
-                <button className="border border-white/10 text-white/60 px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-white/5 hover:text-white transition-all">
-                  Our Work
-                </button>
+                <Link 
+                  href="/#projects"
+                  className="border border-white/10 text-white/60 px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-white/5 hover:text-white transition-all flex items-center justify-center text-center"
+                >
+                  Our Projects
+                </Link>
               </div>
             </Reveal>
           </div>
