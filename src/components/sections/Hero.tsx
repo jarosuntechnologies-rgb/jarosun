@@ -60,12 +60,7 @@ export default function Hero() {
 
             <Reveal delay={0.3}>
               <p className="text-base md:text-lg text-white/50 mb-12 max-w-2xl leading-relaxed">
-                At Jarosun Technologies, we don't just build technology—we engineer possibilities. 
-                Driven by innovation and powered by expertise, we create intelligent digital solutions 
-                that help businesses adapt, grow, and lead in a rapidly evolving world. From next-generation 
-                software and cloud solutions to transformative digital experiences, our mission is to turn 
-                ambitious ideas into impactful realities. We are committed to delivering excellence, 
-                fostering innovation, and shaping a smarter, technology-enabled future.
+                {"Jarosun Technologies isn’t in the business of building technology; we’re in the business of creating opportunities. Guided by innovative thinking and bolstered by expert knowledge, we design smart digital solutions for companies looking to evolve, expand, and succeed in today’s fast-paced world. From cutting-edge software and cloud technologies to disruptive digital experiences, it is our passion to bring your grand ambitions to life."}
               </p>
             </Reveal>
 
