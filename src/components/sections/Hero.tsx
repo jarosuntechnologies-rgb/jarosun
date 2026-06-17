@@ -53,8 +53,8 @@ export default function Hero() {
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="text-5xl md:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight"
               >
-                Web design built for
-                <span className="text-brand-red"> growth.</span>
+                Transforming ideas into
+                <span className="text-brand-red"> digital realities.</span>
               </motion.h1>
             </div>
 
